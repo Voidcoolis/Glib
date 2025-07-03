@@ -16,13 +16,14 @@ app.use(express.json());
 // Middleware to parse cookies(to grab the token from the cookies and add it to the auth.middleware.js)
 app.use(cookieParser());
 
-app.use("/api/auth", authRoutes); // Route for authentification
-app.use("/api/message", messageRoutes)
+// CORS configuration to allow requests from the frontend
 app.use(cors({
   origin: "http://localhost:5173", // Allow requests from the frontend
   credentials: true, // Allow cookies to be sent with requests
 }))
 
+app.use("/api/auth", authRoutes); // Route for authentification
+app.use("/api/message", messageRoutes)
 
 app.listen(PORT, () => {
   console.log("Server is running on PORT:" + PORT);

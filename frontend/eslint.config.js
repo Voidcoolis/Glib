@@ -24,6 +24,7 @@ export default defineConfig([
     },
     rules: {
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
+      "react/prop-types": "off", // Disable prop-types as we use TypeScript for type checking
     },
   },
 ])
