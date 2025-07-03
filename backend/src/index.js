@@ -11,8 +11,12 @@ const app = express();
 
 const PORT = process.env.PORT;
 
-//middleware to parse JSON bodies
-app.use(express.json());
+//! middleware to parse JSON bodies with increased limit (for the profile pic)
+//! if you don't specify the limit, it defaults to 100kb, which is not enough for some images
+app.use(express.json({ limit: "2mb" }));
+//middleware to parse URL-encoded bodies (optional, but recommended if you receive form data)
+app.use(express.urlencoded({ limit: "2mb", extended: true }));
+
 // Middleware to parse cookies(to grab the token from the cookies and add it to the auth.middleware.js)
 app.use(cookieParser());
 
