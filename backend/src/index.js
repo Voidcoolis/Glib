@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { connectDB } from "./lib/db.js";
 import cookieParser from 'cookie-parser';
 import messageRoutes from './routes/message.route.js';
+import cors from 'cors';
 
 dotenv.config(); // Load environment variables from .env file
 const app = express();
@@ -17,6 +18,10 @@ app.use(cookieParser());
 
 app.use("/api/auth", authRoutes); // Route for authentification
 app.use("/api/message", messageRoutes)
+app.use(cors({
+  origin: "http://localhost:5173", // Allow requests from the frontend
+  credentials: true, // Allow cookies to be sent with requests
+}))
 
 
 app.listen(PORT, () => {
