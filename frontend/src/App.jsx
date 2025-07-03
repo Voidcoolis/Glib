@@ -9,9 +9,11 @@ import ProfilePage from "./pages/ProfilePage";
 import { useAuthStore } from "./store/useAuthStore";
 import {Loader} from "lucide-react";
 import { Toaster } from "react-hot-toast";
+import { useThemeStore } from "./store/useThemeStore";
 
 const App = () => {
   const {authUser, checkAuth, isCheckingAuth} = useAuthStore() //called from useAuthStore.js
+  const { theme } = useThemeStore();
 
   useEffect(() => {
     checkAuth(); //check if the user is authenticated when the app loads
@@ -28,7 +30,7 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div div data-theme={theme}>
       <Navbar />
       <Routes>
         //! authUser - if the user is not authenticated, redirect to login page
