@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../lib/axios";
+import { useAuthStore } from "./useAuthStore";
 
 export const useChatStore = create((set, get) => ({
   messages: [],
@@ -44,8 +45,32 @@ export const useChatStore = create((set, get) => ({
       toast.error(error.response.data.message);
     }
   },
+
+  subscribeToMessages: () => {
+    const { selectedUser } = get();
+    if (!selectedUser) return;
+
+    //since socket is in the useAuthStore then this is how we get it & then use it below
+    const socket = useAuthStore.getState().socket;
+
+    // Listen for "newMessage" events from the server
+    socket.on("newMessage", (newMessage) => {
+      // Only add the message if it's from the currently selected user
+      const isMessageSentFromSelectedUser = newMessage.senderId === selectedUser._id;
+      if (!isMessageSentFromSelectedUser) return;
+
+      //! keeping the previous messages in history & adding new message in the end
+      set({
+        messages: [...get().messages, newMessage],
+      });
+    });
+  },
+
+  unsubscribeFromMessages: () => {
+    const socket = useAuthStore.getState().socket;
+    socket.off("newMessage"); // Remove the "newMessage" event listener to prevent memory leaks
+  },
   
-  //todo: optimoize this function to avoid re-fetching messages when the user is already selected
   // this function is used to set the selected user and fetch messages for that user
     setSelectedUser: (selectedUser) => set({ selectedUser }),
 }));

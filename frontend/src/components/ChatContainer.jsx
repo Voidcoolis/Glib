@@ -12,14 +12,30 @@ const ChatContainer = () => {
     getMessages,
     isMessagesLoading,
     selectedUser,
+    subscribeToMessages,
+    unsubscribeFromMessages,
   } = useChatStore();
   const { authUser } = useAuthStore(); //* Get the current authenticated user
   const messageEndRef = useRef(null); // Ref to scroll to the latest message
 
   // useEffect should run without any conditions, that's why we declare it before the if condition
   useEffect(() => {
+    // When the selected user changes, fetch their messages
     getMessages(selectedUser._id);
+
+    //! Start listening for new messages in real time
+    subscribeToMessages() //created in useChatStore
+
+    //! When you leave the chat (or switch users), you stop listening for new messages for the previous user.
+    return () => unsubscribeFromMessages();
   }, [selectedUser._id, getMessages]);
+
+  // whenever there is a new message it scrolls down to show the new message
+useEffect(() => {
+    if (messageEndRef.current && messages) {
+      messageEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   // Show loading skeleton while messages are being fetched
   if (isMessagesLoading) {

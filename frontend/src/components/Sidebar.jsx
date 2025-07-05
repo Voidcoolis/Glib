@@ -29,7 +29,20 @@ const Sidebar = () => {
         <div className="flex items-center gap-2">
           <Users className="size-6" />
         </div>
-        {/* TODO: Online filter toggle */}
+        {/* TODO: Online filter toggle. When clicked it shown only the online users */}
+      <div className="mt-3 hidden lg:flex items-center gap-2">
+          <label className="cursor-pointer flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={showOnlineOnly}
+              onChange={(e) => setShowOnlineOnly(e.target.checked)}
+              className="checkbox checkbox-sm"
+            />
+            <span className="text-sm">Show online only</span>
+          </label>
+          {/* we are doing -1 because we don't want to count ourself */}
+          <span className="text-xs text-zinc-500">({onlineUsers.length - 1} online)</span>
+        </div>
       </div>
 
         {/* User list */}
