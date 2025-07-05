@@ -6,10 +6,12 @@ import cookieParser from 'cookie-parser';
 import messageRoutes from './routes/message.route.js';
 import cors from 'cors';
 import { app, server } from './lib/socket.js';
+import path from 'path';
 
 dotenv.config(); // Load environment variables from .env file
 
 const PORT = process.env.PORT;
+const __dirname = path.resolve(); //this sets the __dirname variable to the absolute path of the current working directory.
 
 //! middleware to parse JSON bodies with increased limit (for the profile pic)
 //! if you don't specify the limit, it defaults to 100kb, which is not enough for some images
@@ -28,6 +30,16 @@ app.use(cors({
 
 app.use("/api/auth", authRoutes); // Route for authentification
 app.use("/api/messages", messageRoutes)
+
+//add in the end after running npm run build
+//! only runs if  app is in production mode 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html")); //Any unknown route returns index.html so client-side routing works
+  });
+}
 
 // replaced app with server from socket.io
 server.listen(PORT, () => {
