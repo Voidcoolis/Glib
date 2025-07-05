@@ -2,7 +2,7 @@ import { create } from "zustand";
 import toast from "react-hot-toast";
 import { axiosInstance } from "../lib/axios";
 
-export const useChatStore = create((set) => ({
+export const useChatStore = create((set, get) => ({
   messages: [],
   users: [],
   selectedUser: null, //initiallly no user is selected
@@ -30,6 +30,18 @@ export const useChatStore = create((set) => ({
       toast.error(error.response.data.message);
     } finally {
       set({ isMessagesLoading: false });
+    }
+  },
+
+  sendMessage: async (messageData) => {
+    // Get the currently selected user and current messages from the store
+    const { selectedUser, messages } = get();
+    try {
+        // Add the new message to the messages array in the store
+      const res = await axiosInstance.post(`/messages/send/${selectedUser._id}`, messageData);
+      set({ messages: [...messages, res.data] }); //keep all the previous messages that we had & add a new one
+    } catch (error) {
+      toast.error(error.response.data.message);
     }
   },
   
