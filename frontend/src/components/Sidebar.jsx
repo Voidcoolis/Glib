@@ -38,7 +38,7 @@ const Sidebar = () => {
               onChange={(e) => setShowOnlineOnly(e.target.checked)}
               className="checkbox checkbox-sm"
             />
-            <span className="text-sm">Show online only</span>
+            <span className="text-sm">Nur online anzeigen</span>
           </label>
           {/* we are doing -1 because we don't want to count ourself */}
           <span className="text-xs text-zinc-500">({onlineUsers.length - 1} online)</span>

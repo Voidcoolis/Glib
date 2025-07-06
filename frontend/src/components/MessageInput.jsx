@@ -80,7 +80,7 @@ const MessageInput = () => {
           <input
             type="text"
             className="w-full input input-bordered rounded-lg input-sm sm:input-md"
-            placeholder="Type a message..."
+            placeholder="Geben Sie eine Nachricht ein..."
             value={text}
             onChange={(e) => setText(e.target.value)}
           />

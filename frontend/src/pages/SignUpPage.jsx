@@ -26,11 +26,11 @@ const SignUpPage = () => {
   const { signup, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
-     if (!formData.fullName.trim()) return toast.error("Full name is required");
-    if (!formData.email.trim()) return toast.error("Email is required");
-    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Invalid email format");
-    if (!formData.password) return toast.error("Password is required");
-    if (formData.password.length < 6) return toast.error("Password must be at least 6 characters");
+     if (!formData.fullName.trim()) return toast.error("Vollständiger Name ist erforderlich");
+    if (!formData.email.trim()) return toast.error("E-Mail ist erforderlich");
+    if (!/\S+@\S+\.\S+/.test(formData.email)) return toast.error("Ungültiges E-Mail-Format");
+    if (!formData.password) return toast.error("");
+    if (formData.password.length < 6) return toast.error("Das Passwort muss mindestens 6 Zeichen lang sein.");
 
     return true; // Form is valid
   };
@@ -57,9 +57,9 @@ const SignUpPage = () => {
               >
                 <MessageSquare className="size-6 text-primary" /> {/* Icon */}
               </div>
-              <h1 className="text-2xl font-bold mt-2">Create Account</h1>
+              <h1 className="text-2xl font-bold mt-2">Konto erstellen</h1>
               <p className="text-base-content/60">
-                Get started with your free account
+                Starten Sie mit Ihrem kostenlosen Konto
               </p>
             </div>
           </div>
@@ -88,7 +88,7 @@ const SignUpPage = () => {
             {/* Sign Up Form for the email */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Email</span>
+                <span className="label-text font-medium">E-Mail</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -108,7 +108,7 @@ const SignUpPage = () => {
             {/* Sign Up Form for the password */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text font-medium">Password</span>
+                <span className="label-text font-medium">Passwort</span>
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -149,7 +149,7 @@ const SignUpPage = () => {
                   Loading...
                 </>
               ) : (
-                "Create Account"
+                "Konto erstellen"
               )}
             </button>
           </form>
@@ -157,9 +157,9 @@ const SignUpPage = () => {
           {/* Link to Login Page */}
           <div className="text-center">
             <p className="text-base-content/60">
-              Already have an account?{" "}
+              Sie haben bereits ein Konto?{" "}
               <Link to="/login" className="link link-primary">
-                Sign in
+                Anmelden
               </Link>
             </p>
           </div>
@@ -168,8 +168,8 @@ const SignUpPage = () => {
 
       {/* right side of the form (image or illustration) */}
       <AuthImagePattern
-        title="Join our community"
-        subtitle="Connect with friends, share moments, and stay in touch with your loved ones."
+        title="Werden Sie Mitglied unserer Gemeinschaft"
+        subtitle="Verbinden Sie sich mit Freunden, teilen Sie Momente und bleiben Sie in Kontakt mit Ihren Lieben."
       />
     </div>
   );

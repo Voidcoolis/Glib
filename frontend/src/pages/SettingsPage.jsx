@@ -4,8 +4,8 @@ import { useThemeStore } from "../store/useThemeStore";
 
 // Mock messages to preview chat appearance
 const PREVIEW_MESSAGES = [
-  { id: 1, content: "Hey! How's it going?", isSent: false },
-  { id: 2, content: "I'm doing great! Just working on some new features.", isSent: true },
+  { id: 1, content: "Hey! Wie geht's denn so?", isSent: false },
+  { id: 2, content: "Mir geht's gut! Ich arbeite gerade an einigen neuen Funktionen", isSent: true },
 ];
 
 const SettingsPage = () => {
@@ -16,8 +16,8 @@ const SettingsPage = () => {
       <div className="space-y-6">
         {/* Theme selection header */}
         <div className="flex flex-col gap-1">
-          <h2 className="text-lg font-semibold">Theme</h2>
-          <p className="text-sm text-base-content/70">Choose a theme for your chat interface</p>
+          <h2 className="text-lg font-semibold">Farbthema</h2>
+          <p className="text-sm text-base-content/70">Wählen Sie ein Thema für Ihr Chat-Interface</p>
         </div>
 
         {/* Theme selection grid */}
@@ -51,7 +51,7 @@ const SettingsPage = () => {
         </div>
 
         {/* Preview Section */}
-        <h3 className="text-lg font-semibold mb-3">Preview</h3>
+        <h3 className="text-lg font-semibold mb-3">Vorschau</h3>
         <div className="rounded-xl border border-base-300 overflow-hidden bg-base-100 shadow-lg">
           <div className="p-4 bg-base-200">
             <div className="max-w-lg mx-auto">
@@ -65,7 +65,7 @@ const SettingsPage = () => {
                       J
                     </div>
                     <div>
-                      <h3 className="font-medium text-sm">John Doe</h3>
+                      <h3 className="font-medium text-sm">Max Mustermann</h3>
                       <p className="text-xs text-base-content/70">Online</p>
                     </div>
                   </div>
@@ -105,7 +105,7 @@ const SettingsPage = () => {
                       type="text"
                       className="input input-bordered flex-1 text-sm h-10"
                       placeholder="Type a message..."
-                      value="This is a preview"
+                      value="Dies ist eine Vorschau"
                       readOnly
                     />
                     <button className="btn btn-primary h-10 min-h-0">
