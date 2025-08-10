@@ -18,9 +18,9 @@ const NoChatSelected = () => {
         </div>
 
         {/* Welcome Text */}
-        <h2 className="text-2xl font-bold">Welcome to Glib!</h2>
+        <h2 className="text-2xl font-bold">Willkommen bei Glib!</h2>
         <p className="text-base-content/60">
-          Select a conversation from the sidebar to start chatting
+          Wählen Sie eine Unterhaltung in der Seitenleiste aus, um den Chat zu starten
         </p>
       </div>
     </div>
